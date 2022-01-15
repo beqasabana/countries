@@ -1,0 +1,64 @@
+.logout-btn {
+    height: fit-content;
+    margin-left: 10px;
+}
+
+.index {
+    margin-top: 20px;
+}
+
+.add-btn {
+    width: 100px;
+}
+
+.show-cont {
+    width: 500px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.show-title-cont {
+    display: flex;
+    justify-content: space-between;
+}
+
+.desc-title {
+    margin-bottom: 0;
+}
+
+.desc {
+    max-width: 400px;
+    margin-left: 20PX;
+}
+
+.table {
+    text-align: center;
+}
+
+thead {
+    background-color: darkgray;
+}
+
+.add-new-btn {
+    float: right;
+}
+
+.register-cont {
+    width: 700px;
+}
+
+.login-cont {
+    width: 500px;
+}
+
+.login-btn {
+    width: 150px;
+}
+
+.register-btn {
+    width: 150px;
+}
+
+.vertical-align {
+    margin: auto 0;
+}

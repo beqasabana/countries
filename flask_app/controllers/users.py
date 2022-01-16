@@ -28,14 +28,14 @@ def login_view():
         return redirect('/')
     return render_template('login.html')
 
-@app.route('/dashboard')
-def dashboard():
+@app.route('/profile/<string:name>/<int:id>')
+def dashboard(name, id):
     if 'user' in session:
         data = {
             'id': session['user']
         }
         active_user = User.get_user_by_id(data)
-        return render_template('dashboard.html', active_user=active_user)
+        return render_template('profile.html', active_user=active_user)
     else:
         flash("You are not logged in!", 'not-loggedin')
         return redirect('/')
@@ -66,10 +66,3 @@ def login():
 def logout():
     session.clear()
     return redirect('/')
-
-@app.route('/add')
-def add():
-    data = {
-        'id': session['user']
-    }
-    return render_template('add.html')

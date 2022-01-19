@@ -17,10 +17,16 @@ def index():
     return render_template('index.html')
 
 @app.route('/register')
-def register_view():
-    if 'user' in session:
+def register_view(updating = False):
+    if 'user' in session and not updating:
         return redirect('/')
     return render_template('register.html')
+
+@app.route('/edit/profile')
+def update_profile():
+    if 'user' not in session:
+        return redirect('/')
+    return register_view(True)
 
 @app.route('/login')
 def login_view():

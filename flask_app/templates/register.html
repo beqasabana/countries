@@ -13,36 +13,34 @@
 
     <div class="register-cont index container overflow-hidden">
         <div class="registration-cont p-3 border bg-light">
-            {% with messages = get_flashed_messages(category_filter=["registration-error"]) %}
-                {% if messages %}
-                    {% for message in messages %}
-                        <p>{{ message }}</p>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
+            
             <form action="/register/user" method="post">
                 <div class="mb-3">
-                    <label for="first_name" class="form-label">First Name:</label>
+                    <label for="first_name" class="form-label">* First Name:</label>
+                    <p>{{ get_flashed_messages(category_filter=["registration-error"])[0] }}</p>
                     <input name="first_name" type="text" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <label for="last_name" class="form-label">Last Name:</label>
+                    <label for="last_name" class="form-label">* Last Name:</label>
+                    <p>{{ get_flashed_messages(category_filter=["registration-error"])[1] }}</p>
                     <input name="last_name" type="text" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email address:</label>
+                    <label for="email" class="form-label">* Email address:</label>
+                    {{ get_flashed_messages(category_filter=["registration-error"])[2] }}
                     <input name="email" type="email" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">Password:</label>
+                    <label for="password" class="form-label">* Password:</label>
+                    <p>{{ get_flashed_messages(category_filter=["registration-error"])[3] }}</p>
                     <input name="password" type="password" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <label for="password-conf" class="form-label">Confirm Password:</label>
+                    <label for="password-conf" class="form-label">* Confirm Password:</label>
                     <input name="password-conf" type="password" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <label for="info" class="form-label">Tell Us About You:</label>
+                    <label for="info" class="form-label">Tell Us About Yourself:</label>
                     <textarea class="form-control" name="info" id="" cols="30" rows="5"></textarea>
                 </div>
                 <div class="text-center"><button type="submit" class="register-btn btn btn-primary">Register</button></div>

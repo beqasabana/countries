@@ -22,3 +22,7 @@
     width: 65%;
 }
 
+.flag {
+    max-width: 225px;
+    max-height: 150px;
+}

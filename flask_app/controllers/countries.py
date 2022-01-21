@@ -12,5 +12,20 @@ def display_all_countries():
             'id': session['user']
         }
         active_user = User.get_user_by_id(data)
-        return render_template('all_countries.html', active_user=active_user, countries=countries)
-    return render_template('all_countries.html', countries=countries)
+        return render_template('all_countries.html', active_user=active_user, all_countries=countries)
+    return render_template('all_countries.html', all_countries=countries)
+
+@app.route('/<string:continent>')
+def display_continent(continent):
+    print(continent)
+    data = {
+        'continent': ' '.join(continent.split('-'))
+    }
+    continent_countries = Country.get_one_continent(data)
+    if 'user' in session:
+        data = {
+            'id': session['user']
+        }
+        active_user = User.get_user_by_id(data)
+        return render_template('one_continent.html', all_countries=continent_countries, active_user=active_user)
+    return render_template('one_continent.html', all_countries=continent_countries)

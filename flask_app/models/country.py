@@ -24,16 +24,54 @@ class Country:
         self.capital = None
         self.languages = []
 
+
+    @staticmethod
+    def continent_sorter(country):
+        if country.continent.lower() == 'europe':
+            return 'europe'
+        elif country.continent.lower() == 'asia':
+            return 'asia'
+        elif country.continent.lower() == 'africa':
+            return 'africa'
+        elif country.continent.lower() == 'north america':
+            return 'north_america'
+        elif country.continent.lower() == 'south america':
+            return 'south_america'
+        else:
+            return 'oceania'
+
     @classmethod
     def get_all(cls):
         query = "SELECT * FROM countries LEFT JOIN country_languages ON code = country_code LEFT JOIN cities ON capital = cities.id;"
         countries = connectToMySQL('world').query_db(query)
-        print(countries[0])
-        cls_countries = []
+        cls_countries = {
+            'europe': [],
+            'asia': [],
+            'africa': [],
+            'north_america': [],
+            'south_america': [],
+            'oceania': []
+        }
+        last_country_added = None
+        first_country = countries.pop(0)
+        continent = Country.continent_sorter(Country(first_country))
+        last_country_added = Country(first_country)
+        cls_countries[continent].append(Country(first_country))
+        cls_countries[continent][-1].languages.append(Language(first_country))
+        city_data = {
+            'id': first_country['cities.id'],
+            'name': first_country['cities.name'],
+            'country_code': first_country['cities.country_code'],
+            'district': first_country['district'],
+            'population': first_country['cities.population']
+        }
+        cls_countries[continent][-1].capital = City(city_data)
         for country in countries:
-            if len(cls_countries) == 0:
-                cls_countries.append(Country(country))
-                cls_countries[-1].languages.append(Language(country))
+            if last_country_added.code != country['code']:
+                continent = Country.continent_sorter(Country(country))
+                last_country_added = Country(country)
+                cls_countries[continent].append(Country(country))
+                cls_countries[continent][-1].languages.append(Language(country))
                 city_data = {
                     'id': country['cities.id'],
                     'name': country['cities.name'],
@@ -41,18 +79,41 @@ class Country:
                     'district': country['district'],
                     'population': country['cities.population']
                 }
-                cls_countries[-1].capital = City(city_data)
-            elif cls_countries[-1].code != country['code']:
-                cls_countries.append(Country(country))
-                cls_countries[-1].languages.append(Language(country))
-                city_data = {
-                    'id': country['cities.id'],
-                    'name': country['cities.name'],
-                    'country_code': country['cities.country_code'],
-                    'district': country['district'],
-                    'population': country['cities.population']
-                }
-                cls_countries[-1].capital = City(city_data)
+                cls_countries[continent][-1].capital = City(city_data)
             else:
-                cls_countries[-1].languages.append(Language(country))
+                continent = Country.continent_sorter(Country(country))
+                last_country_added = Country(country)
+                cls_countries[continent][-1].languages.append(Language(country))
         return cls_countries
+
+    @classmethod
+    def get_one_continent(cls, data):
+        query = "SELECT * FROM countries LEFT JOIN country_languages ON code = country_code LEFT JOIN cities ON capital = cities.id WHERE continent = %(continent)s;"
+        continent_countries_db = connectToMySQL('world').query_db(query, data)
+        continent_countries_cls = []
+        continent_countries_cls.append(Country(continent_countries_db[0]))
+        continent_countries_cls[-1].languages.append(Language(continent_countries_db[0]))
+        city_data = {
+            'id': continent_countries_db[0]['cities.id'],
+            'name': continent_countries_db[0]['cities.name'],
+            'country_code': continent_countries_db[0]['cities.country_code'],
+            'district': continent_countries_db[0]['district'],
+            'population': continent_countries_db[0]['cities.population']
+        }
+        continent_countries_cls[-1].capital = City(city_data)
+        continent_countries_db.pop(0)
+        for country in continent_countries_db:
+            if continent_countries_cls[-1].code != country['code']:
+                continent_countries_cls.append(Country(country))
+                continent_countries_cls[-1].languages.append(Language(country))
+                city_data = {
+                    'id': country['cities.id'],
+                    'name': country['cities.name'],
+                    'country_code': country['cities.country_code'],
+                    'district': country['district'],
+                    'population': country['cities.population']
+                }
+                continent_countries_cls[-1].capital = City(city_data)
+            else:
+                continent_countries_cls[-1].languages.append(Language(country))
+        return continent_countries_cls

@@ -61,43 +61,42 @@
         </div>
     </div>
 
-    <main class="text-center mt-3 mb-5">
-        {% for continent in all_countries.keys() %}
-            <h1>{{ continent.capitalize() }}</h1>
-            {% for index in range(0, all_countries[continent]|length, 2) %}
-                <div class="cotainer">
-                    <div class="row">
-                        {% if all_countries[continent][index] %}
-                            <div class="col one_country text-center">
-                                <img class="flag border border-2 border-dark mt-5" src="https://flagcdn.com/w160/{{ all_countries[continent][index].code2.lower() }}.png" alt="{{ all_countries[continent][index].name }}">
-                                <!-- <iframe
-                                    width="200"
-                                    height="150"
-                                    style="border:0"
-                                    loading="lazy"
-                                    allowfullscreen
-                                    src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCHrfB3OPyVs-AsRWUyuqbcpruopOmVRK4&q={{all_countries[continent][index].name.lower()}}">
-                                </iframe> -->
-                                <h5>{{ all_countries[continent][index].name }} ({{ all_countries[continent][index].code }})</h5>
-                                <p class="mb-0">Capital: {{ all_countries[continent][index].capital.name }}</p>
-                                <p class="m-0">Region: {{ all_countries[continent][index].region }}</p>
-                                <p class="m-0">Continent: {{ all_countries[continent][index].continent }}</p>
-                            </div>
-                        {% endif %}
-                        {% if all_countries[continent][index+1] %}
-                            <div class="col one_country text-center">
-                                <img class="flag border border-2 border-dark mt-5" src="https://flagcdn.com/w160/{{ all_countries[continent][index+1].code2.lower() }}.png" alt="{{ all_countries[continent][index+1].name }}">
-                                <h5>{{ all_countries[continent][index+1].name }} ({{ all_countries[continent][index+1].code }})</h5>
-                                <p class="mb-0">Capital: {{ all_countries[continent][index+1].capital.name }}</p>
-                                <p class="m-0">Region: {{ all_countries[continent][index+1].region }}</p>
-                                <p class="m-0">Continent: {{ all_countries[continent][index+1].continent }}</p>
-                            </div>
-                        {% endif %}
-                    </div>
+
+    <main class="text-center mt-5 mb-5">
+        {% for index in range(0, all_countries|length, 2) %}
+            <div class="cotainer mt-5">
+                <div class="row">
+                    {% if all_countries[index] %}
+                        <div class="col one_country text-center">
+                            <img class="flag border border-2 border-dark" src="https://flagcdn.com/w160/{{ all_countries[index].code2.lower() }}.png" alt="{{ all_countries[index].name }}">
+                            <!-- <iframe
+                                width="200"
+                                height="150"
+                                style="border:0"
+                                loading="lazy"
+                                allowfullscreen
+                                src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCHrfB3OPyVs-AsRWUyuqbcpruopOmVRK4&q={{all_countries[index].name.lower()}}">
+                            </iframe> -->
+                            <h5>{{ all_countries[index].name }} ({{ all_countries[index].code }})</h5>
+                            <p class="mb-0">Capital: {{ all_countries[index].capital.name }}</p>
+                            <p class="m-0">Region: {{ all_countries[index].region }}</p>
+                        </div>
+                    {% endif %}
+                    {% if all_countries[index+1] %}
+                        <div class="col one_country text-center">
+                            <img class="flag border border-2 border-dark" src="https://flagcdn.com/w160/{{ all_countries[index+1].code2.lower() }}.png" alt="{{ all_countries[index+1].name }}">
+                            <h5>{{ all_countries[index+1].name }} ({{ all_countries[index+1].code }})</h5>
+                            <p class="mb-0">Capital: {{ all_countries[index+1].capital.name }}</p>
+                            <p class="m-0">Region: {{ all_countries[index+1].region }}</p>
+                        </div>
+                    {% endif %}
                 </div>
-            {% endfor %}
+            </div>
         {% endfor %}
     </main>
+
+
+
 
     <!-- Optional JavaScript; choose one of the two! -->
     <!-- Option 1: Bootstrap Bundle with Popper -->

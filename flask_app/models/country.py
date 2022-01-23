@@ -117,3 +117,23 @@ class Country:
             else:
                 continent_countries_cls[-1].languages.append(Language(country))
         return continent_countries_cls
+
+    @classmethod
+    def get_country_code(cls, data):
+        query = "SELECT * FROM countries LEFT JOIN country_languages ON code = country_code LEFT JOIN cities ON capital = cities.id WHERE code = %(code)s;"
+        country = connectToMySQL('world').query_db(query, data)
+        country_cls = Country(country[0])
+        country_cls.languages.append(Language(country[0]))
+        city_data = {
+            'id': country[0]['cities.id'],
+            'name': country[0]['cities.name'],
+            'country_code': country[0]['cities.country_code'],
+            'district': country[0]['district'],
+            'population': country[0]['cities.population']
+        }
+        country_cls.capital = City(city_data)
+        country.pop(0)
+        if len(country) > 0:
+            for inst in country:
+                country_cls.languages.append(Language(inst))
+        return country_cls

@@ -11,14 +11,14 @@
     <title>Welcome!</title>
 </head>
 <body>
-    <div class="navigation">
+    <div class="navigation fixed-top">
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
                 <div>
                     {% if not active_user %}
                         <a href="/login" class="navbar-brand">Welcome! Click here to Login and Register</a>
                     {% else %}
-                        <a class="navbar-brand">Welcome {{ active_user.first_name }}!</a>
+                        <a class="navbar-brand" href="/profile/{{active_user.first_name}}{{active_user.last_name}}/{{active_user.id}}">Welcome {{ active_user.first_name }}!</a>
                         <a class="btn btn-outline-success" href="/logout">Logout</a>
                     {% endif %}
                 </div>
@@ -60,21 +60,31 @@
             </ul>
         </div>
     </div>
-    <main class="mt-5">
-        <div class="container-sm d-flex justify-content-center">
-            <div class="main-info row justify-content-md-center">
-                <div class="profile-pic col-4 text-center">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcMrqyW43W_KoTq_nsfBnwuPn0FXvcTe2Kgw&usqp=CAU" alt="profile picture">
-                    <a href="">Upload/Change</a>
-                </div>
-                <div class="personal-info col-5">
-                    <h4>Name: {{active_user.first_name}} {{active_user.last_name}}</h4>
-                    <p>Email: {{active_user.email}}</p>
-                    <a href="/edit/profile">Edit Profile</a> <a href="">Change Password</a>
-                </div>
+
+
+    <main class="text-center main-mult mb-5">
+        <div>
+            <h1>{{country.name}}</h1>
+            <div>
+                <p><span class="mx-2">Capital: {{country.capital.name}}</span> <span class="mx-2">Continent: {{country.continent}}</span> <span class="mx-2">Region: {{country.region}}</span></p>
+                <a class="float-right me-5" href="/report/{{country.name}}/{{country.code}}">Report Outdated/Incorrect Information</a>
             </div>
         </div>
+        <div class="mt-4">
+            <iframe
+                width="90%"
+                height="650"
+                style="border:0"
+                loading="lazy"
+                allowfullscreen
+                src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCHrfB3OPyVs-AsRWUyuqbcpruopOmVRK4&q={{country.name.lower()}}&zoom=6">
+            </iframe>
+        </div>
     </main>
+
+
+
+
 
     <!-- Optional JavaScript; choose one of the two! -->
     <!-- Option 1: Bootstrap Bundle with Popper -->

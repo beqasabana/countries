@@ -11,7 +11,7 @@
     <title>Welcome!</title>
 </head>
 <body>
-    <div class="navigation">
+    <div class="navigation fixed-top">
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
                 <div>
@@ -34,63 +34,61 @@
                     <a class="nav-link" href="\">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/europe">Europe</a>
+                    <a class="nav-link" href="/continent/europe">Europe</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/asia">Asia</a>
+                    <a class="nav-link" href="/continent/asia">Asia</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/africa">Africa</a>
+                    <a class="nav-link" href="/continent/africa">Africa</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/north-america">North America</a>
+                    <a class="nav-link" href="/continent/north-america">North America</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/south-america">South America</a>
+                    <a class="nav-link" href="/continent/south-america">South America</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/oceania">Oceania</a>
+                    <a class="nav-link" href="/continent/oceania">Oceania</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/antarctica">Antarctica</a>
+                    <a class="nav-link" href="/continent/antarctica">Antarctica</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/all/countries">All Countries</a>
+                    <a class="nav-link" href="/allcountries">All Countries</a>
                 </li>
             </ul>
         </div>
     </div>
 
-    <main class="text-center mt-3 mb-5">
+    <main class="main-mult text-center mb-5">
         {% for continent in all_countries.keys() %}
             <h1>{{ continent.capitalize() }}</h1>
             {% for index in range(0, all_countries[continent]|length, 2) %}
-                <div class="cotainer">
+                <div class="cotainer mt-5">
                     <div class="row">
                         {% if all_countries[continent][index] %}
-                            <div class="col one_country text-center">
-                                <img class="flag border border-2 border-dark mt-5" src="https://flagcdn.com/w160/{{ all_countries[continent][index].code2.lower() }}.png" alt="{{ all_countries[continent][index].name }}">
-                                <!-- <iframe
-                                    width="200"
-                                    height="150"
-                                    style="border:0"
-                                    loading="lazy"
-                                    allowfullscreen
-                                    src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCHrfB3OPyVs-AsRWUyuqbcpruopOmVRK4&q={{all_countries[continent][index].name.lower()}}">
-                                </iframe> -->
-                                <h5>{{ all_countries[continent][index].name }} ({{ all_countries[continent][index].code }})</h5>
-                                <p class="mb-0">Capital: {{ all_countries[continent][index].capital.name }}</p>
-                                <p class="m-0">Region: {{ all_countries[continent][index].region }}</p>
-                                <p class="m-0">Continent: {{ all_countries[continent][index].continent }}</p>
+                            <div class="col one-country text-center">
+                                <div onmouseenter="show_explore('{{ all_countries[continent][index].name }}')" onmouseleave="hide_explore('{{ all_countries[continent][index].name }}')" onclick="location.href = 'country/{{ all_countries[continent][index].name }}/{{ all_countries[continent][index].code }}'" class="one-country-btn">
+                                    <p id="{{ all_countries[continent][index].name }}" class="explore-message m-0" >Click To Explore!</p>
+                                    <img class="flag border border-2 border-dark" src="https://flagcdn.com/w160/{{ all_countries[continent][index].code2.lower() }}.png" alt="{{ all_countries[continent][index].name }}">
+                                    <h5>{{ all_countries[continent][index].name }} ({{ all_countries[continent][index].code }})</h5>
+                                    <p class="mb-0">Capital: {{ all_countries[continent][index].capital.name }}</p>
+                                    <p class="m-0">Region: {{ all_countries[continent][index].region }}</p>
+                                    <p class="m-0">Continent: {{ all_countries[continent][index].continent }}</p>
+                                </div>
                             </div>
                         {% endif %}
                         {% if all_countries[continent][index+1] %}
-                            <div class="col one_country text-center">
-                                <img class="flag border border-2 border-dark mt-5" src="https://flagcdn.com/w160/{{ all_countries[continent][index+1].code2.lower() }}.png" alt="{{ all_countries[continent][index+1].name }}">
-                                <h5>{{ all_countries[continent][index+1].name }} ({{ all_countries[continent][index+1].code }})</h5>
-                                <p class="mb-0">Capital: {{ all_countries[continent][index+1].capital.name }}</p>
-                                <p class="m-0">Region: {{ all_countries[continent][index+1].region }}</p>
-                                <p class="m-0">Continent: {{ all_countries[continent][index+1].continent }}</p>
+                            <div class="col one-country text-center">
+                                <div onmouseenter="show_explore('{{ all_countries[continent][index+1].name }}')" onmouseleave="hide_explore('{{ all_countries[continent][index+1].name }}')" onclick="location.href = 'country/{{ all_countries[continent][index+1].name }}/{{ all_countries[continent][index+1].code }}'" class="one-country-btn">
+                                    <p id="{{ all_countries[continent][index+1].name }}" class="explore-message m-0" >Click To Explore!</p>
+                                    <img class="flag border border-2 border-dark" src="https://flagcdn.com/w160/{{ all_countries[continent][index+1].code2.lower() }}.png" alt="{{ all_countries[continent][index+1].name }}">
+                                    <h5>{{ all_countries[continent][index+1].name }} ({{ all_countries[continent][index+1].code }})</h5>
+                                    <p class="mb-0">Capital: {{ all_countries[continent][index+1].capital.name }}</p>
+                                    <p class="m-0">Region: {{ all_countries[continent][index+1].region }}</p>
+                                    <p class="m-0">Continent: {{ all_countries[continent][index+1].continent }}</p>
+                                </div>
                             </div>
                         {% endif %}
                     </div>

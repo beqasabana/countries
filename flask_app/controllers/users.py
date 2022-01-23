@@ -26,7 +26,11 @@ def register_view():
 def update_profile_view():
     if 'user' not in session:
         return redirect('/')
-    return render_template('update_profile.html')
+    data = {
+        'id': session['user']
+    }
+    active_user = User.get_user_by_id(data)
+    return render_template('update_profile.html',active_user=active_user)
 
 @app.route('/login')
 def login_view():

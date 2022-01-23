@@ -1,9 +1,11 @@
 .register-cont {
     width: 700px;
+    margin-top: 4%;
 }
 
 .login-cont {
     width: 500px;
+    margin-top: 20%;
 }
 
 .login-btn {
@@ -25,4 +27,46 @@
 .flag {
     max-width: 225px;
     max-height: 150px;
+}
+
+.one-country-btn {
+    width: fit-content;
+    height: fit-content;
+    margin: auto auto;
+    transition: transform ease 300ms;
+}
+
+.one-country-btn:hover {
+    background-color: rgb(1, 152, 205);
+    transform: translate(0, -10px);
+}
+
+.country-link {
+    text-decoration: none;
+    color: black;
+}
+
+.explore-message {
+    display: none;
+}
+
+body {
+    background-image: url(https://cdn.pixabay.com/photo/2014/04/02/14/09/world-map-306338_1280.png);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position-y: 150px;
+    background-position-x: 20px;
+}
+
+.navigation {
+    float: inline-start;
+}
+
+.main-mult {
+    margin-top: 100px;
+}
+
+.float-right {
+    float: right;
 }

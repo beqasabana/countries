@@ -1,5 +1,7 @@
-// https://maps.googleapis.com/maps/api/geocode/json?address={place}&key=AIzaSyCHrfB3OPyVs-AsRWUyuqbcpruopOmVRK4
+function show_explore(id){
+    document.getElementById(id).style.display = 'block'
+}
 
-// fetch("https://maps.googleapis.com/maps/api/geocode/json?address=usa&key=AIzaSyCHrfB3OPyVs-AsRWUyuqbcpruopOmVRK4")
-//     .then(response => response.json())
-//     .then(geoData => console.log(geoData))
+function hide_explore(id){
+    document.getElementById(id).style.display = 'none'
+}

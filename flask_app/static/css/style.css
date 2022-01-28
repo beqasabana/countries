@@ -1,4 +1,4 @@
-.register-cont {
+.register-cont, .edit-cont {
     width: 700px;
     margin-top: 4%;
 }
@@ -8,8 +8,17 @@
     margin-top: 20%;
 }
 
+.pass-cont {
+    width: 500px;
+    margin-top: 15%;
+}
+
 .login-btn {
     width: 150px;
+}
+
+.pass-btn {
+    width: 200px;
 }
 
 .register-btn {
@@ -56,11 +65,7 @@ body {
     background-repeat: no-repeat;
     background-size: auto;
     background-position-y: 150px;
-    background-position-x: 20px;
-}
-
-.navigation {
-    float: inline-start;
+    background-position-x: 200px;
 }
 
 .main-mult {
@@ -69,4 +74,8 @@ body {
 
 .float-right {
     float: right;
+}
+
+.navigation {
+    background-color: white;
 }

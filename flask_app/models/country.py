@@ -137,3 +137,13 @@ class Country:
             for inst in country:
                 country_cls.languages.append(Language(inst))
         return country_cls
+
+    @classmethod
+    def add_report(cls, data):
+        query =''' 
+        INSERT INTO reported_issues_country 
+        (code, continent, region, surface_area, indep_year, population, life_expectancy, gnp, gnp_old, local_name, government_form, head_of_state, capital, code2) 
+        VALUES (%(code)s, %(continent)s, %(region)s, %(surface_area)s, %(indep_year)s, %(population)s, %(life_expectancy)s, %(gnp)s, %(gnp_old)s, %(local_name)s, %(government_form)s, %(head_of_state)s, %(capital)s, %(code2)s);
+        '''
+        report_id = connectToMySQL('world').query_db(query, data)
+        return

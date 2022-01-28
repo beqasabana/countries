@@ -9,3 +9,9 @@ class City:
         self.country_code = data['country_code']
         self.district = data['district']
         self.population = data['population']
+
+    @classmethod
+    def get_city_id(cls, data):
+        query = "SELECT * FROM cities WHERE name = %(name)s;"
+        city = connectToMySQL('world').query_db(query, data)
+        return city[0]['id']

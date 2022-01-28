@@ -62,12 +62,78 @@
     </div>
 
 
-    <main class="text-center main-mult mb-5">
-        <div>
-            <h1>{{country.name}}</h1>
-            
+    
+    <div class="edit-cont index container overflow-hidden main-mult">
+        <div class="edit-cont p-3 border bg-light">
+            <form action="/report/country" method="post">
+                <div class="mb-3">
+                    <!-- <label for="code" class="mb-0 form-label">* Code:</label> -->
+                    <!-- <p>{{ get_flashed_messages(category_filter=["registration-error"])[0] }}</p> -->
+                    <input name="code" type="text" class="form-control" value="{{country.code}}" hidden>
+                </div>
+                <div class="mb-3">
+                    <label for="name" class="mb-0 form-label">* Name:</label>
+                    <!-- <p>{{ get_flashed_messages(category_filter=["registration-error"])[1] }}</p> -->
+                    <input name="name" type="text" class="form-control" value="{{country.name}}">
+                </div>
+                <div class="mb-3">
+                    <label for="capital" class="mb-0 form-label">* Capital:</label>
+                    <input name="capital" type="text" class="form-control" value="{{country.capital.name}}">
+                </div>
+                <div class="mb-3">
+                    <label for="continent" class="mb-0 form-label">* Continent:</label>
+                    <!-- {{ get_flashed_messages(category_filter=["registration-error"])[2] }} -->
+                    <input name="continent" type="text" class="form-control" value="{{country.continent}}">
+                </div>
+                <div class="mb-3">
+                    <label for="region" class="mb-0 form-label">* Region:</label>
+                    <!-- <p>{{ get_flashed_messages(category_filter=["registration-error"])[3] }}</p> -->
+                    <input name="region" type="text" class="form-control" value="{{country.region}}">
+                </div>
+                <div class="mb-3">
+                    <label for="surface_area" class="mb-0 form-label">* Surface Area(In square kilometers):</label>
+                    <input name="surface_area" type="text" class="form-control" value="{{country.surface_area}}">
+                </div>
+                <div class="mb-3">
+                    <label for="indep_year" class="mb-0 form-label">* Independence Year:</label>
+                    <input name="indep_year" type="text" class="form-control" value="{{country.indep_year}}">
+                </div>
+                <div class="mb-3">
+                    <label for="population" class="mb-0 form-label">* Population:</label>
+                    <input name="population" type="text" class="form-control" value="{{country.population}}">
+                </div>
+                <div class="mb-3">
+                    <label for="life_expectancy" class="mb-0 form-label">* Life Expectancy:</label>
+                    <input name="life_expectancy" type="text" class="form-control" value="{{country.life_expectancy}}">
+                </div>
+                <div class="mb-3">
+                    <label for="gnp" class="mb-0 form-label">* GNP:</label>
+                    <input name="gnp" type="text" class="form-control" value="{{country.gnp}}">
+                </div>
+                <div class="mb-3">
+                    <label for="gnp_old" class="mb-0 form-label">* Old GNP:</label>
+                    <input name="gnp_old" type="text" class="form-control" value="{{country.gnp_old}}">
+                </div>
+                <div class="mb-3">
+                    <label for="local_name" class="mb-0 form-label">* Local Name:</label>
+                    <input name="local_name" type="text" class="form-control" value="{{country.local_name}}">
+                </div>
+                <div class="mb-3">
+                    <label for="government_form" class="mb-0 form-label">* Government Form:</label>
+                    <input name="government_form" type="text" class="form-control" value="{{country.government_form}}">
+                </div>
+                <div class="mb-3">
+                    <label for="head_of_state" class="mb-0 form-label">* Head of State:</label>
+                    <input name="head_of_state" type="text" class="form-control" value="{{country.head_of_state}}">
+                </div>
+                <div class="mb-3">
+                    <label for="code2" class="mb-0 form-label">* Two Letter Code:</label>
+                    <input name="code2" type="text" class="form-control" value="{{country.code2}}">
+                </div>
+                <div class="text-center"><button type="submit" class="register-btn btn btn-primary">Report</button></div>
+            </form>
         </div>
-    </main>
+    </div>
 
 
 

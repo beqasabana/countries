@@ -30,7 +30,7 @@ def update_profile_view():
         'id': session['user']
     }
     active_user = User.get_user_by_id(data)
-    return render_template('update_profile.html',active_user=active_user)
+    return render_template('update_profile.html', active_user=active_user)
 
 @app.route('/login')
 def login_view():
@@ -76,3 +76,39 @@ def login():
 def logout():
     session.clear()
     return redirect('/')
+
+@app.route('/update/user/<int:user_id>', methods=['POST'])
+def update_profile(user_id):
+    data = {
+        'id': user_id,
+        'first_name': request.form['first_name'],
+        'last_name': request.form['last_name'],
+        'email': request.form['email'],
+        'info': request.form['info']
+    }
+    User.update_user(data)
+    return redirect('/profile/' + request.form['first_name'] + request.form['last_name'] + '/' + str(user_id))
+
+@app.route('/change/password')
+def change_password_view():
+    if 'user' not in session:
+        return redirect('/')
+    data = {
+        'id': session['user']
+    }
+    active_user = User.get_user_by_id(data)
+    return render_template('change_password.html', active_user=active_user)
+
+@app.route('/changing/password', methods = ['POST'])
+def change_password():
+    user = User.get_user_by_id({
+        'id': session['user']
+    })
+    if not User.validate_password_change(request.form, user.email):
+        return redirect('/change/password')
+    password_data = {
+        'id': user.id,
+        'password': bcrypt.generate_password_hash(request.form['new_password'])
+    }
+    User.update_password(password_data)
+    return redirect('/profile' + '/' + user.first_name + user.last_name + '/' + str(user.id))

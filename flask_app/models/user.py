@@ -95,3 +95,50 @@ class User:
             flash("Invalid Email Address or Password.", 'login-error')
             return is_valid
         return user.id
+
+    @classmethod
+    def update_user(cls, data):
+        query = "UPDATE users SET first_name = %(first_name)s, last_name = %(last_name)s, email = %(email)s, info = %(info)s WHERE id = %(id)s;"
+        result = connectToMySQL('world').query_db(query, data)
+        return result
+
+    @classmethod
+    def update_password(cls, data):
+        query = "UPDATE users SET password = %(password)s WHERE id = %(id)s;"
+        result = connectToMySQL('world').query_db(query, data)
+        return result
+
+
+# does not work properly needs to be reworked
+    @staticmethod
+    def validate_update(form):
+        is_valid = True
+        if len(form['first_name']) < 3:
+            is_valid = False
+            flash("First Name must be at least 2 Characters.", 'registration-error')
+        if len(form['last_name']) < 3:
+            is_valid = False
+            flash("Last Name must be at least 2 Characters.", 'registration-error')
+        is_valid = User.validate_email(form)
+        return is_valid
+
+    @staticmethod
+    def validate_password_change(form, email=None):
+        is_valid = True
+        data = {
+            'email': email
+        }
+        user = User.get_user_by_email(data)
+        if not users.bcrypt.check_password_hash(user.password, form['old_password']):
+            is_valid = False
+            flash("Old Password is Wrong.", 'password-error')
+            return is_valid
+        if len(form['new_password']) < 8:
+            flash("Password is too short. Password should be at least 8 characters.", 'password-error')
+            is_valid = False
+            return is_valid
+        if form['new_password'] != form['conf_new_password']:
+            flash("Password does not match.", 'password-error')
+            is_valid = False
+            return is_valid
+        return user.id

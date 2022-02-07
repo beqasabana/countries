@@ -47,6 +47,7 @@
 
 .one-country-btn:hover {
     background-color: rgb(1, 152, 205);
+    padding: 10px;
     transform: translate(0, -10px);
 }
 
@@ -68,9 +69,9 @@ body {
     background-position-x: 200px;
 }
 
-.main-mult {
-    margin-top: 100px;
-}
+/* .main-mult {
+    
+} */
 
 .float-right {
     float: right;
@@ -78,4 +79,8 @@ body {
 
 .navigation {
     background-color: white;
+}
+
+.b-display {
+    display: block;
 }

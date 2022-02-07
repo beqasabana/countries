@@ -90,3 +90,13 @@ def report_country():
             report_data[key] = None
     report_id = Country.add_report(report_data)
     return redirect('/country/' + country.name + '/' + country.code)
+
+@app.route('/search', methods=['POST'])
+def search():
+    data = {
+        'name': request.form['search_term']
+    }
+    country = Country.get_country_name(data)
+    if not country:
+        return redirect('/')
+    return redirect(f"/country/{country.name}/{country.code}")

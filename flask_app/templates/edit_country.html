@@ -16,7 +16,7 @@
             <div class="container-fluid">
                 <div>
                     {% if not active_user %}
-                        <a href="/login" class="navbar-brand">Welcome! Click here to Login and Register</a>
+                        <a href="/login" class="navbar-brand">Welcome! Click here to Login or Register</a>
                     {% else %}
                         <a class="navbar-brand" href="/profile/{{active_user.first_name}}{{active_user.last_name}}/{{active_user.id}}">Welcome {{ active_user.first_name }}!</a>
                         <a class="btn btn-outline-success" href="/logout">Logout</a>

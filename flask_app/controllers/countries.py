@@ -93,9 +93,15 @@ def report_country():
 
 @app.route('/search', methods=['POST'])
 def search():
+    continents = ('europe', 'asia', 'africa', 'north america', 'south america', 'oceania', 'antarctica')
+    if request.form['search_term'].lower() in continents:
+        data = {
+            'continent': request.form['search_term']
+        }
+        return redirect(f"/continent/{request.form['search_term'].lower()}")
     data = {
-        'name': request.form['search_term']
-    }
+            'name': request.form['search_term']
+        }
     country = Country.get_country_name(data)
     if not country:
         return redirect('/')

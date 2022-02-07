@@ -18,7 +18,6 @@ def display_all_countries():
 
 @app.route('/continent/<string:continent>')
 def display_continent(continent):
-    print(continent)
     data = {
         'continent': ' '.join(continent.split('-'))
     }
